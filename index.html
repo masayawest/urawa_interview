@@ -12,6 +12,7 @@
 <meta property="og:title" content="マリウス・ホイブラーテン インタビュー全文日本語訳">
 <meta property="og:description" content="ロングインタビュー全文日本語訳・全14章。">
 <style>
+/* mobile-menu build: 2026-09-08 / breakpoint 820px */
 :root {
   --bg:#f7f5f1; --surface:#fffdf9; --text:#242424; --muted:#6a6a67; --line:#ddd8cf;
   --accent:#8b2424; --accent-soft:#f5eaea; --host:#5f6368; --marius:#265d8f;
@@ -28,7 +29,7 @@ a{color:inherit}
 .topbar{position:sticky;top:0;z-index:900;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 88%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
 .topbar-inner{max-width:calc(var(--content) + 40px);margin:0 auto;min-height:52px;padding:8px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .topbar-title{min-width:0;font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none}
-.topbar-toc{flex:0 0 auto;font-size:14px;font-weight:800;text-decoration:none;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.topbar-toc{flex:0 0 auto;font-size:14px;font-weight:800;text-decoration:none;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface);display:inline-block}
 .menu-toggle{display:none;flex:0 0 auto;width:42px;height:42px;padding:0;border:1px solid var(--line);border-radius:11px;background:var(--surface);color:var(--text);align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .menu-icon{position:relative;width:20px;height:14px;display:block}
 .menu-icon span{position:absolute;left:0;width:20px;height:2px;border-radius:999px;background:currentColor;transition:transform .22s ease,top .22s ease,opacity .18s ease}
@@ -56,11 +57,12 @@ h1{font-family:ui-serif,"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif
 .back-to-toc{display:inline-block;margin-top:8px;color:var(--muted);text-decoration:none;font-size:14px;font-weight:750;border-bottom:1px solid var(--line)}
 .floating-toc{position:fixed;right:max(14px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:850;text-decoration:none;font-size:14px;font-weight:900;color:var(--text);background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);padding:9px 13px;border-radius:999px}
 .footer{border-top:1px solid var(--line);margin-top:6px;padding:26px 0 0;color:var(--muted);font-size:13px} ::selection{background:var(--accent-soft)}
-@media(max-width:640px){
+@media(max-width:820px){
+  .topbar-inner{min-height:56px;padding-top:7px;padding-bottom:7px}
   .topbar-toc{display:none}
   .menu-toggle{display:inline-flex}
   .floating-toc{display:none}
-  .mobile-menu{display:block;position:fixed;top:52px;left:0;right:0;z-index:890;max-height:calc(100dvh - 52px);overflow-y:auto;overscroll-behavior:contain;background:color-mix(in srgb,var(--bg) 97%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 14px 30px rgba(0,0,0,.10);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-8px);transition:opacity .2s ease,transform .2s ease,visibility .2s}
+  .mobile-menu{display:block;position:fixed;top:56px;left:0;right:0;z-index:890;max-height:calc(100dvh - 56px);overflow-y:auto;overscroll-behavior:contain;background:color-mix(in srgb,var(--bg) 97%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 14px 30px rgba(0,0,0,.10);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-8px);transition:opacity .2s ease,transform .2s ease,visibility .2s}
   .mobile-menu.open{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
   .mobile-menu-inner{max-width:var(--content);margin:0 auto;padding:16px 18px max(24px,env(safe-area-inset-bottom))}
   .mobile-menu h2{font-size:15px;letter-spacing:.08em;margin:0 0 6px;color:var(--muted)}
@@ -184,6 +186,6 @@ h1{font-family:ui-serif,"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif
   toggle?.addEventListener('click',()=>toggle.getAttribute('aria-expanded')==='true'?closeMenu():openMenu());
   menu?.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu()});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
-  addEventListener('resize',()=>{if(innerWidth>640)closeMenu()});
+  addEventListener('resize',()=>{if(innerWidth>820)closeMenu()});
 })();</script>
 </body></html>
