@@ -29,6 +29,14 @@ a{color:inherit}
 .topbar-inner{max-width:calc(var(--content) + 40px);margin:0 auto;min-height:52px;padding:8px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .topbar-title{min-width:0;font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none}
 .topbar-toc{flex:0 0 auto;font-size:14px;font-weight:800;text-decoration:none;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.menu-toggle{display:none;flex:0 0 auto;width:42px;height:42px;padding:0;border:1px solid var(--line);border-radius:11px;background:var(--surface);color:var(--text);align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.menu-icon{position:relative;width:20px;height:14px;display:block}
+.menu-icon span{position:absolute;left:0;width:20px;height:2px;border-radius:999px;background:currentColor;transition:transform .22s ease,top .22s ease,opacity .18s ease}
+.menu-icon span:nth-child(1){top:0}.menu-icon span:nth-child(2){top:6px}.menu-icon span:nth-child(3){top:12px}
+.menu-toggle[aria-expanded="true"] .menu-icon span:nth-child(1){top:6px;transform:rotate(45deg)}
+.menu-toggle[aria-expanded="true"] .menu-icon span:nth-child(2){opacity:0}
+.menu-toggle[aria-expanded="true"] .menu-icon span:nth-child(3){top:6px;transform:rotate(-45deg)}
+.mobile-menu{display:none}
 main{max-width:var(--content);margin:0 auto;padding:0 20px 72px}
 .hero{padding:clamp(54px,11vw,90px) 0 34px}
 .eyebrow{color:var(--accent);font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
@@ -48,13 +56,28 @@ h1{font-family:ui-serif,"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif
 .back-to-toc{display:inline-block;margin-top:8px;color:var(--muted);text-decoration:none;font-size:14px;font-weight:750;border-bottom:1px solid var(--line)}
 .floating-toc{position:fixed;right:max(14px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:850;text-decoration:none;font-size:14px;font-weight:900;color:var(--text);background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);padding:9px 13px;border-radius:999px}
 .footer{border-top:1px solid var(--line);margin-top:6px;padding:26px 0 0;color:var(--muted);font-size:13px} ::selection{background:var(--accent-soft)}
+@media(max-width:640px){
+  .topbar-toc{display:none}
+  .menu-toggle{display:inline-flex}
+  .floating-toc{display:none}
+  .mobile-menu{display:block;position:fixed;top:52px;left:0;right:0;z-index:890;max-height:calc(100dvh - 52px);overflow-y:auto;overscroll-behavior:contain;background:color-mix(in srgb,var(--bg) 97%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 14px 30px rgba(0,0,0,.10);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-8px);transition:opacity .2s ease,transform .2s ease,visibility .2s}
+  .mobile-menu.open{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
+  .mobile-menu-inner{max-width:var(--content);margin:0 auto;padding:16px 18px max(24px,env(safe-area-inset-bottom))}
+  .mobile-menu h2{font-size:15px;letter-spacing:.08em;margin:0 0 6px;color:var(--muted)}
+  .mobile-menu ol{list-style:none;padding:0;margin:0}
+  .mobile-menu li+li{border-top:1px solid var(--line)}
+  .mobile-menu a{display:grid;grid-template-columns:2.2em 1fr;gap:8px;padding:12px 2px;text-decoration:none;font-size:15px;font-weight:700;line-height:1.45}
+  .mobile-menu .toc-num{font-size:12px}
+  body.menu-open{overflow:hidden}
+}
 @media(max-width:480px){main{padding-left:18px;padding-right:18px}.hero{padding-top:46px}.toc{padding:20px 16px 16px;border-radius:14px}.speech{padding-left:11px;margin-bottom:22px}}
 @media print{.topbar,#reading-progress,.floating-toc,.back-to-toc{display:none!important}body{background:white;color:black;font-size:11pt}main{max-width:none;padding:0}.toc{box-shadow:none}.chapter{break-before:page}.chapter:first-of-type{break-before:auto}}
 </style>
 </head>
 <body id="top">
 <div id="reading-progress" aria-hidden="true"></div>
-<header class="topbar"><div class="topbar-inner"><a class="topbar-title" href="#top">マリウス・ホイブラーテン｜インタビュー全文</a><a class="topbar-toc" href="#toc">目次</a></div></header>
+<header class="topbar"><div class="topbar-inner"><a class="topbar-title" href="#top">マリウス・ホイブラーテン｜インタビュー全文</a><a class="topbar-toc" href="#toc">目次</a><button class="menu-toggle" type="button" aria-label="目次メニューを開く" aria-controls="mobile-menu" aria-expanded="false"><span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span></button></div></header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="スマートフォン用目次"><div class="mobile-menu-inner"><h2>目次</h2><ol></ol></div></nav>
 <main><article>
 <header class="hero"><div class="eyebrow">LONG INTERVIEW · JAPANESE TRANSCRIPT</div><h1>マリウス・ホイブラーテン<br>インタビュー全文日本語訳</h1><p class="subtitle">全14章。目次から読みたい章へ直接移動できます。</p><aside class="editor-note"><strong>表記について：</strong> 表記について 添付されたノルウェー語の自動文字起こしをもとに、会話の前後関係から話者を「司会者」「マリウス」に整理しました。明らかな誤認識は文脈に沿って補正し、意味のない重複や「あー」「えー」などは読みやすさのため一部整理していますが、発言内容はできる限り省略せず収録しています。固有名詞など、音声認識上の不確かな部分は文脈上もっとも可能性の高い表記を採用しています。</aside></header>
 <nav class="toc" id="toc" aria-label="目次"><h2>目次</h2><ol><li><a href="#chapter-1"><span class="toc-num">01</span><span>「人を苛立たせてきた男」――番組の導入</span></a></li><li><a href="#chapter-2"><span class="toc-num">02</span><span>18歳でリレストロムを去った決断</span></a></li><li><a href="#chapter-3"><span class="toc-num">03</span><span>ロニー・デイラとストレームスゴトセで学んだこと</span></a></li><li><a href="#chapter-4"><span class="toc-num">04</span><span>サンデフィヨルの強さと、サッカーを考える力</span></a></li><li><a href="#chapter-5"><span class="toc-num">05</span><span>ボードー／グリムトへの移籍と、衝撃のトレーニング</span></a></li><li><a href="#chapter-6"><span class="toc-num">06</span><span>欧州カップ戦、プレッシャー、そしてミスとの向き合い方</span></a></li><li><a href="#chapter-7"><span class="toc-num">07</span><span>嫌な相手、サッカーの駆け引き、給水タイムへの疑問</span></a></li><li><a href="#chapter-8"><span class="toc-num">08</span><span>浦和レッズから届いた、日本への誘い</span></a></li><li><a href="#chapter-9"><span class="toc-num">09</span><span>浦和という巨大クラブと、アジア制覇</span></a></li><li><a href="#chapter-10"><span class="toc-num">10</span><span>ペール＝マティアス・ヘグモと、日本式組織との文化衝突</span></a></li><li><a href="#chapter-11"><span class="toc-num">11</span><span>ハイテクと旧式が同居する日本、敬語、子どもの教育</span></a></li><li><a href="#chapter-12"><span class="toc-num">12</span><span>日本を離れ、UAEへ――キャリア後半の新しい挑戦</span></a></li><li><a href="#chapter-13"><span class="toc-num">13</span><span>リーベル・プレートへの“無視”騒動と、アルゼンチンからの殺到</span></a></li><li><a href="#chapter-14"><span class="toc-num">14</span><span>これからのキャリアと、いつか再びリレストロムへ</span></a></li></ol></nav>
@@ -146,5 +169,21 @@ h1{font-family:ui-serif,"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif
 <footer class="footer"><p>マリウス・ホイブラーテン インタビュー全文日本語訳</p></footer>
 </article></main>
 <a class="floating-toc" href="#toc" aria-label="目次へ移動">☰ 目次</a>
-<script>(()=>{const bar=document.getElementById('reading-progress');const update=()=>{const d=document.documentElement,m=d.scrollHeight-window.innerHeight,p=m>0?Math.min(100,Math.max(0,window.scrollY/m*100)):0;bar.style.width=p+'%'};update();addEventListener('scroll',update,{passive:true});addEventListener('resize',update)})();</script>
+<script>(()=>{
+  const bar=document.getElementById('reading-progress');
+  const update=()=>{const d=document.documentElement,m=d.scrollHeight-window.innerHeight,p=m>0?Math.min(100,Math.max(0,window.scrollY/m*100)):0;bar.style.width=p+'%'};
+  update();addEventListener('scroll',update,{passive:true});addEventListener('resize',update);
+
+  const toggle=document.querySelector('.menu-toggle');
+  const menu=document.getElementById('mobile-menu');
+  const list=menu?.querySelector('ol');
+  const sourceLinks=document.querySelectorAll('#toc li');
+  if(list && sourceLinks.length){sourceLinks.forEach(item=>list.appendChild(item.cloneNode(true)));}
+  const closeMenu=()=>{if(!toggle||!menu)return;toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','目次メニューを開く');menu.classList.remove('open');document.body.classList.remove('menu-open')};
+  const openMenu=()=>{if(!toggle||!menu)return;toggle.setAttribute('aria-expanded','true');toggle.setAttribute('aria-label','目次メニューを閉じる');menu.classList.add('open');document.body.classList.add('menu-open')};
+  toggle?.addEventListener('click',()=>toggle.getAttribute('aria-expanded')==='true'?closeMenu():openMenu());
+  menu?.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+  addEventListener('resize',()=>{if(innerWidth>640)closeMenu()});
+})();</script>
 </body></html>
